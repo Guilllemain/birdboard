@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
+    <header class="flex items-center mb-3 py-4">
+        <div class="flex justify-between items-end w-full">
+            <h2 class="text-grey text-sm font-normal">My projects</h2>
+            <a href="/projects/create">New project</a>
+        </div>
+    </header>
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-</head>
-
-<body>
-    <ul>
-        @foreach($projects as $project)
-            <li>
-                <a href="{{$project->path()}}">{{ $project->title }}</a>
-            </li>
-        @endforeach
-    </ul>
-</body>
-
-</html>
+    <main class="lg:flex lg:flex-wrap -mx-3">
+        @forelse($projects as $project)
+            <div class="lg:w-1/3 px-3 pb-6" style="height: 200px">
+                @include('projects.card')
+            </div>
+        @endforelse
+            <div>No projects yet</div>
+        @empty
+    </main>
+@section('content')
